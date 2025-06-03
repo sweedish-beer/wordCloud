@@ -72,13 +72,22 @@ def get_color_scheme_choice():
 
 def parse_word_input(text_input):
     """Parse input like '55 "freedom", 16 "loyalty"' into a frequency dictionary"""
+    # Debug: show what we received
+    print(f"{Colors.BLUE}Debug - Input received: {repr(text_input)}{Colors.END}")
+    
     # Pattern to match: number followed by quoted word
     pattern = r'(\d+)\s*"([^"]+)"'
     matches = re.findall(pattern, text_input)
     
+    # Debug: show what matches we found
+    print(f"{Colors.BLUE}Debug - Matches found: {matches}{Colors.END}")
+    
     word_freq = {}
     for count, word in matches:
         word_freq[word.strip()] = int(count)
+    
+    return word_freq  # This was missing!
+
 def create_wordcloud(word_frequencies, colormap='plasma', output_filename=None):
     """Create and save word cloud from frequency dictionary"""
     if not word_frequencies:
